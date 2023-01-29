@@ -4,7 +4,7 @@ const app = express();
 const fs = require ("fs");
 
 
-const PORT = process.env.port || 3001;
+const PORT = process.env.PORT || 3001;
 
 //app.use(express.static(__dirname + 'public'));
 app.use(express.static(path.join(__dirname, "./public")));
@@ -26,7 +26,7 @@ app.use("/api/notes",noteRoutes)
 
 
 app.listen(PORT, function () {
-    console.log("listening on port " + PORT );
+    console.log("v2. listening on port " + PORT );
 });
 
 
