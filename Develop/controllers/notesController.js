@@ -23,6 +23,7 @@ router.post("/", (req, res) => {
       throw err;
     } else {
       const noteData = JSON.parse(data);
+      req.body.id = noteData.length + 1
       noteData.push(req.body);
       fs.writeFile(dbFileName, JSON.stringify(noteData, null, 4), (err) => {
         if (err) {
@@ -50,6 +51,30 @@ router.get("/:id", (req, res) => {
         }
       }
       return res.send("next note");
+    }
+  });
+});
+
+router.delete("/:id", (req, res) => {
+  fs.readFile(dbFileName, "utf-8", (err, data) => {
+    if (err) {
+      res.status(500).send("error occurred!");
+      throw err;
+    } else {
+      const noteData = JSON.parse(data);
+      for (let i = 0; i < noteData.length; i++) {
+        const note = noteData[i];
+        if (note.id == req.params.id) {
+          noteData.splice(i,1)
+          fs.writeFile(dbFileName, JSON.stringify(noteData, null, 4), (err) => {
+            if (err) {
+              res.status(500).send("err");
+              throw err;
+            }
+          });
+          return res.json(note);
+        }
+      }
     }
   });
 });
