@@ -19,7 +19,7 @@ router.get("/", (req, res) => {
 router.post("/", (req, res) => {
     fs.readFile(dbFileName, "utf-8", (err, data) => {
     if (err) {
-      res.status(500).send("oh no!");
+      res.status(500).send("error occurred");
       throw err;
     } else {
       const noteData = JSON.parse(data);
@@ -40,7 +40,7 @@ router.post("/", (req, res) => {
 router.get("/:id", (req, res) => {
   fs.readFile(dbFileName, "utf-8", (err, data) => {
     if (err) {
-      res.status(500).send("oh no!");
+      res.status(500).send("error occurred");
       throw err;
     } else {
       const noteData = JSON.parse(data);
@@ -58,7 +58,7 @@ router.get("/:id", (req, res) => {
 router.delete("/:id", (req, res) => {
   fs.readFile(dbFileName, "utf-8", (err, data) => {
     if (err) {
-      res.status(500).send("error occurred!");
+      res.status(500).send("error occurred");
       throw err;
     } else {
       const noteData = JSON.parse(data);
